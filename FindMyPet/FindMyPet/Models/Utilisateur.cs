@@ -13,7 +13,7 @@ namespace FindMyPet.Models
         public String email { get; set; }
         public String login { get; set; }
         public String password { get; set; }
-        public virtual Role role_id {get;set; }
+        public virtual Role role {get;set; }
 
         public Utilisateur()
         {
