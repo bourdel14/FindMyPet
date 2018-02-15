@@ -17,7 +17,8 @@ namespace FindMyPet.Controllers
         // GET: Animals
         public ActionResult Index()
         {
-            return View(db.animals.ToList());
+            var animals = db.animals.Include(c => c.type_animal);
+            return View(animals.ToList());
         }
 
         // GET: Animals/Details/5
@@ -38,7 +39,10 @@ namespace FindMyPet.Controllers
         // GET: Animals/Create
         public ActionResult Create()
         {
-            return View();
+            AnimalViewModel animalvm = new AnimalViewModel();
+            var types = db.typesAnimal.ToList();
+            animalvm.Types = types;
+            return View(animalvm);
         }
 
         // POST: Animals/Create
@@ -46,16 +50,24 @@ namespace FindMyPet.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nom")] Animal animal)
+        public ActionResult Create(AnimalViewModel animalvm)
         {
+            //for get all types
+            var types = db.typesAnimal.ToList();
+
+            animalvm.Types = types;
+
+            Animal a = new Animal();
+            a.nom = animalvm.Nom;
+            a.type_animal = db.typesAnimal.Find(animalvm.selectedTypeID);
+
             if (ModelState.IsValid)
             {
-                db.animals.Add(animal);
+                db.animals.Add(a);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(animal);
+            return View(animalvm);
         }
 
         // GET: Animals/Edit/5
@@ -123,5 +135,6 @@ namespace FindMyPet.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

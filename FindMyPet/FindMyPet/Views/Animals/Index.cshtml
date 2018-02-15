@@ -14,6 +14,9 @@
         <th>
             @Html.DisplayNameFor(model => model.nom)
         </th>
+        <th>
+            Type Animal
+        </th>
         <th></th>
     </tr>
 
@@ -21,6 +24,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type_animal.libelle)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |

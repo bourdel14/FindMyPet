@@ -159,6 +159,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Animal.cs" />
+    <Compile Include="Models\AnimalViewModel.cs" />
     <Compile Include="Models\Annonce.cs" />
     <Compile Include="Models\Commentaire.cs" />
     <Compile Include="Models\FMPContext.cs" />

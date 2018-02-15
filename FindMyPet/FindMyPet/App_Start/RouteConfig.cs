@@ -20,9 +20,9 @@ namespace FindMyPet
             );
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                name: "CreateAnimal",
+                url: "{controller}/{action}",
+                defaults: new { controller = "Animals", action = "Create"}
             );
         }
     }
