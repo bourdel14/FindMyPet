@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using FindMyPet.Models;
 
 namespace FindMyPet.Controllers
@@ -13,6 +14,42 @@ namespace FindMyPet.Controllers
     public class UtilisateursController : Controller
     {
         private FMPContext db = new FMPContext();
+
+        public ActionResult Login()
+        {
+            UserViewModel uservm = new UserViewModel();
+            uservm.Authentifie = HttpContext.User.Identity.IsAuthenticated;
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                uservm.user = GetUser(HttpContext.User.Identity.Name);
+            }
+            return View(uservm);
+        }
+
+        [HttpPost]
+        public ActionResult Login(UserViewModel uservm, String returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                Utilisateur utilisateur = Authentifier(uservm.user.login, uservm.user.password);
+                if (utilisateur != null)
+                {
+                    FormsAuthentication.SetAuthCookie(utilisateur.id.ToString(), false);
+                    if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        return Redirect(returnUrl);
+                    return Redirect("/");
+                }
+                ModelState.AddModelError("Utilisateur.Login", "Prénom et/ou mot de passe incorrect(s)");
+            }
+            return View(uservm);
+        }
+
+        public ActionResult Deconnexion()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect("/");
+        }
 
         // GET: Utilisateurs
         public ActionResult Index()
@@ -55,6 +92,7 @@ namespace FindMyPet.Controllers
                 utilisateur.role = role;
                 db.users.Add(utilisateur);
                 db.SaveChanges();
+                FormsAuthentication.SetAuthCookie(utilisateur.id.ToString(), false);
                 return RedirectToAction("Index");
             }
             
@@ -126,5 +164,24 @@ namespace FindMyPet.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public Utilisateur Authentifier(String login, String mdp)
+        {
+            return db.users.FirstOrDefault(u => u.login == login && u.password == mdp);
+        }
+
+        public Utilisateur GetUser(int id)
+        {
+            return db.users.FirstOrDefault(u => u.id == id);
+        }
+
+        public Utilisateur GetUser(string idString)
+        {
+            int id;
+            if (int.TryParse(idString, out id))
+                return GetUser(id);
+            return null;
+        }
+
     }
 }

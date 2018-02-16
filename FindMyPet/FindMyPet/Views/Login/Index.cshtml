@@ -1,0 +1,37 @@
+﻿@model FindMyPet.Models.UserViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (Model.Authentifie)
+{
+    <h3>
+        Vous êtes déjà authentifié avec le login :
+        @Model.user.prenom
+    </h3>
+    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+}
+else
+{
+    <p>
+        Veuillez vous authentifier :
+    </p>
+    using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(m => m.user.login)
+            @Html.TextBoxFor(m => m.user.login)
+            @Html.ValidationMessageFor(m => m.user.login)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.user.password)
+            @Html.PasswordFor(m => m.user.password)
+            @Html.ValidationMessageFor(m => m.user.password)
+        </div>
+        <input type="submit" value="Se connecter" />
+        <br />
+        @Html.ActionLink("Créer un compte", "Create")
+    }
+}

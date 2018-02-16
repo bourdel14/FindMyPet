@@ -10,6 +10,7 @@ using FindMyPet.Models;
 
 namespace FindMyPet.Controllers
 {
+    [Authorize]
     public class AnimalsController : Controller
     {
         private FMPContext db = new FMPContext();

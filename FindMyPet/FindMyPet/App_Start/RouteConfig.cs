@@ -24,6 +24,12 @@ namespace FindMyPet
                 url: "{controller}/{action}",
                 defaults: new { controller = "Animals", action = "Create"}
             );
+
+            routes.MapRoute(
+                name: "Login",
+                url: "{controller}/{action}",
+                defaults: new { controller = "Utilisateurs", action = "Login" }
+            );
         }
     }
 }
