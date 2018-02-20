@@ -27,7 +27,7 @@ namespace FindMyPet
 
             routes.MapRoute(
                 name: "Login",
-                url: "{controller}/{action}",
+                url: "Login/Index",
                 defaults: new { controller = "Utilisateurs", action = "Login" }
             );
         }

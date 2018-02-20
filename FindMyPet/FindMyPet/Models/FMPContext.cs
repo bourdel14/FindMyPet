@@ -13,7 +13,6 @@ namespace FindMyPet.Models
         public DbSet<Utilisateur> users { get; set; }
         public DbSet<Role> roles { get; set; }
         public DbSet<Type_Animal> typesAnimal { get; set; }
-        public DbSet<Animal> animals { get; set; }
         public DbSet<Annonce> annonces { get; set; }
         public DbSet<Commentaire> commentaires { get; set; }
     }

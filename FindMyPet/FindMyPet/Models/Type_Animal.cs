@@ -9,10 +9,9 @@ namespace FindMyPet.Models
     {
         public int id { get; set; }
         public String libelle { get; set; }
-        public virtual ICollection<Animal> Animals { get; set; }
         public Type_Animal()
         {
-
+            
         }
     }
 }

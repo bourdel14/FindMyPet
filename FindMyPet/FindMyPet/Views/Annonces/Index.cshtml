@@ -1,0 +1,69 @@
+﻿@model IEnumerable<FindMyPet.Models.Annonce>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            Type animal
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.localisation)
+        </th>
+        <th>
+            Statut
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type_animal.libelle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.localisation)
+        </td>
+        <td>
+            @if (item.estRetrouve)
+            {
+                {
+                    ViewBag.Message = "Retrouvé";
+                }
+            }
+            else
+            {
+                {
+                    ViewBag.Message = "En cours";
+                }
+            }
+            @Html.Raw(ViewBag.Message);
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

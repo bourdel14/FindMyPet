@@ -86,7 +86,7 @@ namespace FindMyPet.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Utilisateur utilisateur)
         {
-            var role = db.roles.Find(utilisateur.role.id);
+            var role = db.roles.Find(1);
             if (ModelState.IsValid)
             {
                 utilisateur.role = role;

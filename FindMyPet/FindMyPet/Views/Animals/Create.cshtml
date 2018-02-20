@@ -28,7 +28,7 @@
 
                 @Html.DropDownListFor(m => m.selectedTypeID,
                 new SelectList(Model.Types, "id", "libelle"), "-Please select a Type-")
-                @Html.ValidationMessageFor(m => m.Nom)
+                @Html.ValidationMessageFor(m => m.Type.libelle)
                
             </div>
         </div>

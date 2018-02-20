@@ -3,16 +3,22 @@ namespace FindMyPet.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class first : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Animals",
+                "dbo.Annonces",
                 c => new
                     {
                         id = c.Int(nullable: false, identity: true),
+                        race = c.String(),
                         nom = c.String(),
+                        description = c.String(),
+                        date = c.DateTime(nullable: false),
+                        photo = c.String(),
+                        localisation = c.String(),
+                        estRetrouve = c.Boolean(nullable: false),
                         type_animal_id = c.Int(),
                         user_id = c.Int(),
                     })
@@ -57,22 +63,6 @@ namespace FindMyPet.Migrations
                 .PrimaryKey(t => t.id);
             
             CreateTable(
-                "dbo.Annonces",
-                c => new
-                    {
-                        id = c.Int(nullable: false, identity: true),
-                        description = c.String(),
-                        date = c.DateTime(nullable: false),
-                        photo = c.String(),
-                        localisation = c.String(),
-                        estRetrouve = c.Boolean(nullable: false),
-                        animal_id = c.Int(),
-                    })
-                .PrimaryKey(t => t.id)
-                .ForeignKey("dbo.Animals", t => t.animal_id)
-                .Index(t => t.animal_id);
-            
-            CreateTable(
                 "dbo.Commentaires",
                 c => new
                     {
@@ -89,21 +79,18 @@ namespace FindMyPet.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Commentaires", "annonce_id", "dbo.Annonces");
-            DropForeignKey("dbo.Annonces", "animal_id", "dbo.Animals");
-            DropForeignKey("dbo.Animals", "user_id", "dbo.Utilisateurs");
+            DropForeignKey("dbo.Annonces", "user_id", "dbo.Utilisateurs");
             DropForeignKey("dbo.Utilisateurs", "role_id", "dbo.Roles");
-            DropForeignKey("dbo.Animals", "type_animal_id", "dbo.Type_Animal");
+            DropForeignKey("dbo.Annonces", "type_animal_id", "dbo.Type_Animal");
             DropIndex("dbo.Commentaires", new[] { "annonce_id" });
-            DropIndex("dbo.Annonces", new[] { "animal_id" });
             DropIndex("dbo.Utilisateurs", new[] { "role_id" });
-            DropIndex("dbo.Animals", new[] { "user_id" });
-            DropIndex("dbo.Animals", new[] { "type_animal_id" });
+            DropIndex("dbo.Annonces", new[] { "user_id" });
+            DropIndex("dbo.Annonces", new[] { "type_animal_id" });
             DropTable("dbo.Commentaires");
-            DropTable("dbo.Annonces");
             DropTable("dbo.Roles");
             DropTable("dbo.Utilisateurs");
             DropTable("dbo.Type_Animal");
-            DropTable("dbo.Animals");
+            DropTable("dbo.Annonces");
         }
     }
 }

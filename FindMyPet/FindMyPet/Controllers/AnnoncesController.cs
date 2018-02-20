@@ -11,119 +11,136 @@ using FindMyPet.Models;
 namespace FindMyPet.Controllers
 {
     [Authorize]
-    public class AnimalsController : Controller
+    public class AnnoncesController : Controller
     {
         private FMPContext db = new FMPContext();
 
-        // GET: Animals
+        [AllowAnonymous]
+        // GET: Annonces
         public ActionResult Index()
         {
-            var animals = db.animals.Include(c => c.type_animal);
-            return View(animals.ToList());
+            return View(db.annonces.ToList());
         }
 
-        // GET: Animals/Details/5
+        // GET: Annonces/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Animal animal = db.animals.Find(id);
-            if (animal == null)
+            Annonce annonce = db.annonces.Find(id);
+            if (annonce == null)
             {
                 return HttpNotFound();
             }
-            return View(animal);
+            return View(annonce);
         }
 
-        // GET: Animals/Create
+        // GET: Annonces/Create
         public ActionResult Create()
         {
-            AnimalViewModel animalvm = new AnimalViewModel();
+            AnnonceViewModel annoncevm = new AnnonceViewModel();
             var types = db.typesAnimal.ToList();
-            animalvm.Types = types;
-            return View(animalvm);
+            annoncevm.Types = types;
+            return View(annoncevm);
         }
 
-        // POST: Animals/Create
+        // POST: Annonces/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AnimalViewModel animalvm)
+        public ActionResult Create(AnnonceViewModel annoncevm)
         {
-            //for get all types
             var types = db.typesAnimal.ToList();
+            annoncevm.Types = types;
 
-            animalvm.Types = types;
+            Annonce a = new Annonce();
 
-            Animal a = new Animal();
-            a.nom = animalvm.Nom;
-            a.type_animal = db.typesAnimal.Find(animalvm.selectedTypeID);
+            a.nom = annoncevm.annonce.nom;
+
+            var typeSelected = db.typesAnimal.Find(annoncevm.SelectedTypeID);
+            a.type_animal = typeSelected;
+            a.description = annoncevm.annonce.description;
+            a.date = DateTime.Now;
+            a.estRetrouve = false;
+            a.localisation = annoncevm.annonce.localisation;
+            a.user = db.users.FirstOrDefault(u => u.id.ToString() == HttpContext.User.Identity.Name);
 
             if (ModelState.IsValid)
             {
-                db.animals.Add(a);
+                db.annonces.Add(a);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(animalvm);
+
+            return View(annoncevm);
         }
 
-        // GET: Animals/Edit/5
+        // GET: Annonces/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Animal animal = db.animals.Find(id);
-            if (animal == null)
+            AnnonceViewModel annoncevm = new AnnonceViewModel();
+
+            var p_annonce = db.annonces.Find(id);
+
+            var types = db.typesAnimal.ToList();
+            var typeId = db.annonces.Where(a => a.type_animal.id == annoncevm.SelectedTypeID);
+            annoncevm.SelectedTypeID = annoncevm.Type.id;
+            if (p_annonce == null)
             {
                 return HttpNotFound();
             }
-            return View(animal);
+
+            annoncevm.Types = types;
+            annoncevm.annonce = p_annonce;
+            return View(annoncevm);
         }
 
-        // POST: Animals/Edit/5
+        // POST: Annonces/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nom")] Animal animal)
+        public ActionResult Edit(Annonce annonce)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(animal).State = EntityState.Modified;
+                db.Entry(annonce).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(animal);
+            return View(annonce);
         }
 
-        // GET: Animals/Delete/5
+        // GET: Annonces/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Animal animal = db.animals.Find(id);
-            if (animal == null)
+            Annonce annonce = db.annonces.Find(id);
+            if (annonce == null)
             {
                 return HttpNotFound();
             }
-            return View(animal);
+            return View(annonce);
         }
 
-        // POST: Animals/Delete/5
+        // POST: Annonces/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Animal animal = db.animals.Find(id);
-            db.animals.Remove(animal);
+            Annonce annonce = db.annonces.Find(id);
+            db.annonces.Remove(annonce);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -136,6 +153,5 @@ namespace FindMyPet.Controllers
             }
             base.Dispose(disposing);
         }
-
     }
 }

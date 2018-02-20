@@ -148,24 +148,24 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AnimalsController.cs" />
+    <Compile Include="Controllers\AnnoncesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UtilisateursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802142252190_first.cs" />
-    <Compile Include="Migrations\201802142252190_first.Designer.cs">
-      <DependentUpon>201802142252190_first.cs</DependentUpon>
+    <Compile Include="Migrations\201802190902197_init.cs" />
+    <Compile Include="Migrations\201802190902197_init.Designer.cs">
+      <DependentUpon>201802190902197_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Animal.cs" />
-    <Compile Include="Models\AnimalViewModel.cs" />
     <Compile Include="Models\Annonce.cs" />
+    <Compile Include="Models\AnnonceViewModel.cs" />
     <Compile Include="Models\Commentaire.cs" />
     <Compile Include="Models\FMPContext.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Type_Animal.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -216,6 +216,12 @@
     <Content Include="Views\Utilisateurs\Details.cshtml" />
     <Content Include="Views\Utilisateurs\Edit.cshtml" />
     <Content Include="Views\Utilisateurs\Index.cshtml" />
+    <Content Include="Views\Utilisateurs\Login.cshtml" />
+    <Content Include="Views\Annonces\Create.cshtml" />
+    <Content Include="Views\Annonces\Delete.cshtml" />
+    <Content Include="Views\Annonces\Details.cshtml" />
+    <Content Include="Views\Annonces\Edit.cshtml" />
+    <Content Include="Views\Annonces\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -234,8 +240,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802142252190_first.resx">
-      <DependentUpon>201802142252190_first.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802190902197_init.resx">
+      <DependentUpon>201802190902197_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
