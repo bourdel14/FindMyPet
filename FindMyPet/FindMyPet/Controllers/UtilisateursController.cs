@@ -182,6 +182,36 @@ namespace FindMyPet.Controllers
                 return GetUser(id);
             return null;
         }
+        [Authorize]
+        public ActionResult Compte()
+        {
+            UserViewModel uservm = new UserViewModel();
+            Utilisateur user = db.users.FirstOrDefault(u => u.id.ToString() == HttpContext.User.Identity.Name);
+
+            uservm.user = user;
+
+            return View(uservm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Compte(UserViewModel uservm)
+        {
+            Utilisateur user = new Utilisateur();
+            var p_user = db.users.FirstOrDefault(u => u.id.ToString() == HttpContext.User.Identity.Name);
+
+            user = p_user;
+
+            if (uservm.newPassword != user.password && uservm.newPassword == uservm.confirmPassword)
+            {
+                user.password = uservm.newPassword;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Compte");
+            }
+
+            return View(uservm);
+        }
 
     }
 }

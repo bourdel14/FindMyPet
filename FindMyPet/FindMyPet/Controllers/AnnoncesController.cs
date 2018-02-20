@@ -91,8 +91,7 @@ namespace FindMyPet.Controllers
             var p_annonce = db.annonces.Find(id);
 
             var types = db.typesAnimal.ToList();
-            var typeId = db.annonces.Where(a => a.type_animal.id == annoncevm.SelectedTypeID);
-            annoncevm.SelectedTypeID = annoncevm.Type.id;
+
             if (p_annonce == null)
             {
                 return HttpNotFound();
@@ -100,6 +99,7 @@ namespace FindMyPet.Controllers
 
             annoncevm.Types = types;
             annoncevm.annonce = p_annonce;
+            annoncevm.SelectedTypeID = p_annonce.type_animal.id;
             return View(annoncevm);
         }
 
@@ -108,15 +108,30 @@ namespace FindMyPet.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Annonce annonce)
+        public ActionResult Edit(AnnonceViewModel annoncevm)
         {
+            Annonce a = new Annonce();
+            var annonce = db.annonces.Find(annoncevm.annonce.id);
+            a = annonce;
+
+            var types = db.typesAnimal.ToList();
+            annoncevm.Types = types;
+            var typeSelected = db.typesAnimal.Find(annoncevm.SelectedTypeID);
+
+            a.nom = annoncevm.annonce.nom;
+            a.race = annoncevm.annonce.race;
+            a.description = annoncevm.annonce.description;
+            a.localisation = annoncevm.annonce.localisation;
+
+            a.type_animal = typeSelected;
+
             if (ModelState.IsValid)
             {
-                db.Entry(annonce).State = EntityState.Modified;
+                db.Entry(a).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(annonce);
+            return View(annoncevm);
         }
 
         // GET: Annonces/Delete/5

@@ -206,11 +206,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Animals\Create.cshtml" />
-    <Content Include="Views\Animals\Delete.cshtml" />
-    <Content Include="Views\Animals\Details.cshtml" />
-    <Content Include="Views\Animals\Edit.cshtml" />
-    <Content Include="Views\Animals\Index.cshtml" />
     <Content Include="Views\Utilisateurs\Create.cshtml" />
     <Content Include="Views\Utilisateurs\Delete.cshtml" />
     <Content Include="Views\Utilisateurs\Details.cshtml" />
@@ -222,6 +217,7 @@
     <Content Include="Views\Annonces\Details.cshtml" />
     <Content Include="Views\Annonces\Edit.cshtml" />
     <Content Include="Views\Annonces\Index.cshtml" />
+    <Content Include="Views\Utilisateurs\Compte.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

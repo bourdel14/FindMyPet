@@ -9,5 +9,7 @@ namespace FindMyPet.Models
     {
         public Boolean Authentifie { get; set; }
         public Utilisateur user { get; set; }
+        public String newPassword { get; set; }
+        public String confirmPassword { get; set; }
     }
 }
