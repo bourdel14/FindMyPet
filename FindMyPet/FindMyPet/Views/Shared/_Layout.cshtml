@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -21,10 +22,25 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Annonce", "Index", "Annonce/Index")</li>
-                    <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                    <li>@Html.ActionLink("Index", "Index", "Annonces")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Mes annonces", "MesAnnonces", 
+                           "Utilisateurs")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Déconnexion", "Deconnexion",
+                           "Utilisateurs")
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink("Connexion", "Login",
+                           "Utilisateurs")
+                        </li>
+                    }
+                    </ul>
             </div>
         </div>
     </div>

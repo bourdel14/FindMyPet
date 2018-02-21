@@ -61,7 +61,7 @@
             @Html.LabelFor(model => model.annonce.estRetrouve, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.annonce.estRetrouve)
+                    @Html.CheckBoxFor(model => model.annonce.estRetrouve, new { Name="estRetrouveEdit" })
                     @Html.ValidationMessageFor(model => model.annonce.estRetrouve, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -65,7 +65,17 @@ namespace FindMyPet.Controllers
             a.type_animal = typeSelected;
             a.description = annoncevm.annonce.description;
             a.date = DateTime.Now;
-            a.estRetrouve = false;
+            var ischecked = Request.Form["estRetrouve"];
+
+            if(ischecked == "on")
+            {
+                a.estRetrouve = true;
+            }
+            else
+            {
+                a.estRetrouve = false;
+            }
+
             a.localisation = annoncevm.annonce.localisation;
             a.user = db.users.FirstOrDefault(u => u.id.ToString() == HttpContext.User.Identity.Name);
 
@@ -73,7 +83,7 @@ namespace FindMyPet.Controllers
             {
                 db.annonces.Add(a);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MesAnnonces", "Utilisateurs");
             }
 
             return View(annoncevm);
@@ -125,11 +135,22 @@ namespace FindMyPet.Controllers
 
             a.type_animal = typeSelected;
 
+            var ischecked = Request.Form["estRetrouveEdit"];
+
+            if (ischecked == "true")
+            {
+                a.estRetrouve = true;
+            }
+            else
+            {
+                a.estRetrouve = false;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(a).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MesAnnonces","Utilisateurs");
             }
             return View(annoncevm);
         }
@@ -157,7 +178,7 @@ namespace FindMyPet.Controllers
             Annonce annonce = db.annonces.Find(id);
             db.annonces.Remove(annonce);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("MesAnnonces", "Utilisateurs");
         }
 
         protected override void Dispose(bool disposing)

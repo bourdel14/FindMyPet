@@ -23,6 +23,13 @@
             </div>
         </div>
         <div class="form-group">
+            @Html.LabelFor(model => model.annonce.race, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.annonce.race, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.annonce.race, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.annonce.description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.annonce.description, new { htmlAttributes = new { @class = "form-control" } })
@@ -53,6 +60,15 @@
                 new SelectList(Model.Types, "id", "libelle"), "-Sélectionner une race-")
                 @Html.ValidationMessageFor(m => m.Type.libelle)
 
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.annonce.estRetrouve, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(model => model.annonce.estRetrouve, new { Name = "estRetrouve" })
+                    @Html.ValidationMessageFor(model => model.annonce.estRetrouve, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 

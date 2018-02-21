@@ -1,0 +1,55 @@
+﻿@model IEnumerable<FindMyPet.Models.Annonce>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mes annonces</h2>
+<p>
+    @Html.ActionLink("Créer une annonce", "Create","Annonces")
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.race)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.localisation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type_animal.libelle)
+        </th>
+        <th>
+            Role
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.race)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.localisation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type_animal.libelle)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit",new { Controller = "Annonces", action = "Edit", id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { Controller = "Annonces", action = "Detail", id = item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { Controller = "Annonces", action = "Delete", id = item.id })
+        </td>
+    </tr>
+}
+
+</table>

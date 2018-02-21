@@ -119,7 +119,7 @@ namespace FindMyPet.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nom,prenom,email,login,password")] Utilisateur utilisateur)
+        public ActionResult Edit(Utilisateur utilisateur)
         {
             if (ModelState.IsValid)
             {
@@ -211,6 +211,13 @@ namespace FindMyPet.Controllers
             }
 
             return View(uservm);
+        }
+
+        public ActionResult MesAnnonces()
+        {
+            List<Annonce> annonce = db.annonces.Where(a => a.user.id.ToString() == HttpContext.User.Identity.Name).ToList();
+
+            return View(annonce);
         }
 
     }

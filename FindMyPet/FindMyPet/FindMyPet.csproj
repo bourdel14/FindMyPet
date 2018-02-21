@@ -148,6 +148,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnnoncesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UtilisateursController.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Models\Commentaire.cs" />
     <Compile Include="Models\FMPContext.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SignalementViewModel.cs" />
     <Compile Include="Models\Type_Animal.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\Utilisateur.cs" />
@@ -218,6 +220,11 @@
     <Content Include="Views\Annonces\Edit.cshtml" />
     <Content Include="Views\Annonces\Index.cshtml" />
     <Content Include="Views\Utilisateurs\Compte.cshtml" />
+    <Content Include="Views\Admin\CreateTypeAnimal.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\EditTypeAnimal.cshtml" />
+    <Content Include="Views\Admin\DeleteTypeAnimal.cshtml" />
+    <Content Include="Views\Utilisateurs\MesAnnonces.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
