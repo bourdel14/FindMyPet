@@ -151,13 +151,14 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnnoncesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SignalementsController.cs" />
     <Compile Include="Controllers\UtilisateursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802190902197_init.cs" />
-    <Compile Include="Migrations\201802190902197_init.Designer.cs">
-      <DependentUpon>201802190902197_init.cs</DependentUpon>
+    <Compile Include="Migrations\201802211555507_signalement.cs" />
+    <Compile Include="Migrations\201802211555507_signalement.Designer.cs">
+      <DependentUpon>201802211555507_signalement.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Annonce.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Models\Commentaire.cs" />
     <Compile Include="Models\FMPContext.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Signalement.cs" />
     <Compile Include="Models\SignalementViewModel.cs" />
     <Compile Include="Models\Type_Animal.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -225,6 +227,11 @@
     <Content Include="Views\Admin\EditTypeAnimal.cshtml" />
     <Content Include="Views\Admin\DeleteTypeAnimal.cshtml" />
     <Content Include="Views\Utilisateurs\MesAnnonces.cshtml" />
+    <Content Include="Views\Signalements\Create.cshtml" />
+    <Content Include="Views\Signalements\Delete.cshtml" />
+    <Content Include="Views\Signalements\Details.cshtml" />
+    <Content Include="Views\Signalements\Edit.cshtml" />
+    <Content Include="Views\Signalements\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -243,8 +250,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802190902197_init.resx">
-      <DependentUpon>201802190902197_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802211555507_signalement.resx">
+      <DependentUpon>201802211555507_signalement.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,5 +15,6 @@ namespace FindMyPet.Models
         public DbSet<Type_Animal> typesAnimal { get; set; }
         public DbSet<Annonce> annonces { get; set; }
         public DbSet<Commentaire> commentaires { get; set; }
+        public DbSet<Signalement> signalements { get; set; }
     }
 }
