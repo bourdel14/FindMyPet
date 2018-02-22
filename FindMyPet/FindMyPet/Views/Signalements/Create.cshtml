@@ -23,14 +23,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.signalement.photo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.signalement.photo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.signalement.photo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.signalement.localisation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.signalement.localisation, new { htmlAttributes = new { @class = "form-control" } })
@@ -39,14 +31,13 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.signalement.estRetrouve, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.signalement.photo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.signalement.estRetrouve, new { Name= "estRetrouve" })
-                    @Html.ValidationMessageFor(model => model.signalement.estRetrouve, "", new { @class = "text-danger" })
-                </div>
+                <input type="file" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
             </div>
         </div>
+        
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

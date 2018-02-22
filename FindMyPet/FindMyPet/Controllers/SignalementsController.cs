@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FindMyPet.Models;
+using System.IO;
 
 namespace FindMyPet.Controllers
 {
+    [AllowAnonymous]
     public class SignalementsController : Controller
     {
         private FMPContext db = new FMPContext();
@@ -46,7 +48,7 @@ namespace FindMyPet.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Signalement signalementViewModel)
+        public ActionResult Create(SignalementViewModel signalementViewModel)
         {
             Signalement signalement = new Signalement();
 
@@ -62,16 +64,10 @@ namespace FindMyPet.Controllers
 
             var ischecked = Request.Form["estRetrouve"];
 
-            if (ischecked == "on")
-            {
-                signalement.estRetrouve = true;
-            }
-            else
-            {
-                signalement.estRetrouve = false;
-            }
-
             signalement.date = DateTime.Now;
+
+            signalement.localisation = signalementViewModel.signalement.localisation;
+            signalement.description = signalementViewModel.signalement.description;
 
             if (ModelState.IsValid)
             {

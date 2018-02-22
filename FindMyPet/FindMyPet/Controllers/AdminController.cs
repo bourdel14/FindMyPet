@@ -9,7 +9,6 @@ using System.Web.Mvc;
 
 namespace FindMyPet.Controllers
 {
-    [Authorize]
     public class AdminController : Controller
     {
         private FMPContext db = new FMPContext();

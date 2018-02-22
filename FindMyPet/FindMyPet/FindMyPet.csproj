@@ -228,9 +228,7 @@
     <Content Include="Views\Admin\DeleteTypeAnimal.cshtml" />
     <Content Include="Views\Utilisateurs\MesAnnonces.cshtml" />
     <Content Include="Views\Signalements\Create.cshtml" />
-    <Content Include="Views\Signalements\Delete.cshtml" />
     <Content Include="Views\Signalements\Details.cshtml" />
-    <Content Include="Views\Signalements\Edit.cshtml" />
     <Content Include="Views\Signalements\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

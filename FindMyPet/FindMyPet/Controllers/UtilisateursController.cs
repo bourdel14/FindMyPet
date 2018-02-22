@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using FindMyPet.Models;
+using System.Security.Principal;
 
 namespace FindMyPet.Controllers
 {
@@ -36,6 +37,7 @@ namespace FindMyPet.Controllers
                 if (utilisateur != null)
                 {
                     FormsAuthentication.SetAuthCookie(utilisateur.id.ToString(), false);
+
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
                     return Redirect("/");
